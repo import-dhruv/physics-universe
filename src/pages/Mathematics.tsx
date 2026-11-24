@@ -40,7 +40,7 @@ export function MathematicsPage() {
         <div className="card panel">
           <h3 style={{ fontSize: 13 }}>Calculus → Field theory</h3>
           <p className="subtle" style={{ lineHeight: 1.7 }}>Gradient, divergence and curl are the local language of Maxwell’s equations, fluid flow and gravitation. The divergence theorem converts local differential laws into global conservation statements.</p>
-          <button className="btn btn-sm" onClick={() => go('/derivation/f-der-gauss-law')}>See a derivation <ArrowRight size={12} /></button>
+          <button className="btn btn-sm" onClick={() => go('/derivation/e-der-gauss-coulomb')}>See a derivation <ArrowRight size={12} /></button>
         </div>
         <div className="card panel">
           <h3 style={{ fontSize: 13 }}>Linear algebra → Quantum mechanics</h3>
