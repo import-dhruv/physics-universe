@@ -14,6 +14,12 @@ import { EXPANDED_TOPICS_7 } from './content.expanded.7'
 import { EXPANDED_TOPICS_8 } from './content.expanded.8'
 import { EXPANDED_TOPICS_9 } from './content.expanded.9'
 import { EXPANDED_SHORT_TOPICS } from './content.expanded.short'
+import { EXTRA_PREREQUISITES, TOPIC_SIMULATION_LINKS } from './enrichments'
+import { EXTRA_EXPERIMENTS } from './content.extra.experiments'
+import { EXTRA_DERIVATIONS_1 } from './content.extra.derivations1'
+import { EXTRA_DERIVATIONS_2 } from './content.extra.derivations2'
+import { EXTRA_PROBLEMS_1 } from './content.extra.problems1'
+import { EXTRA_PROBLEMS_2 } from './content.extra.problems2'
 import { REFERENCES, LEARNING_PATHS, TIMELINE, FRONTIERS, SCIENTISTS, TOPIC_SUMMARIES, TOPIC_KEY_EQUATIONS } from './content.library'
 
 export { BRANCHES, BRANCH_BY_ID, ALL_TOPIC_IDS }
@@ -30,14 +36,54 @@ const ALL_AUTHORED: Topic[] = [
 // A Map keyed by id keeps the final (deepest) version of any topic that was
 // authored more than once.
 export const TOPICS: Topic[] = [...new Map(ALL_AUTHORED.map(t => [t.id, t])).values()]
+
+// Fill structural gaps: a few topics were authored without prerequisites or
+// without a simulation link. These curated links are content, not placeholders.
+TOPICS.forEach(t => {
+  if (!t.prerequisites.length && EXTRA_PREREQUISITES[t.id]) t.prerequisites = [...EXTRA_PREREQUISITES[t.id]]
+  const linked = TOPIC_SIMULATION_LINKS[t.id]
+  if (linked) t.simulationIds = [...new Set([...(t.simulationIds ?? []), ...linked])]
+})
+// Topic-specific self-assessment prompts are derived from each article's own
+// "Common misconceptions" and "Core concepts" sections, so the Quick Check on
+// every topic page asks about that topic rather than a generic question.
+export const QUICK_CHECKS: Record<string, { prompt: string; answer: string }> =
+  Object.fromEntries(TOPICS.map(t => {
+    const afterHeading = (name: string) => {
+      const i = t.blocks.findIndex(b => b.kind === 'heading' && b.text.toLowerCase() === name)
+      return i >= 0 ? t.blocks.slice(i + 1, i + 8) : []
+    }
+    const firstItem = (name: string) => {
+      const b = afterHeading(name).find(x => x.kind === 'list')
+      return b && b.kind === 'list' ? b.items[0] : undefined
+    }
+    const misconception = firstItem('Common misconceptions')
+    const concept = firstItem('Core concepts')
+    const insight = t.blocks.find(b => b.kind === 'callout' && b.tone === 'insight')
+    const worked = t.blocks.find(b => b.kind === 'steps')
+    const workedLast = worked && worked.kind === 'steps' ? worked.items[worked.items.length - 1] : undefined
+    const insightText = insight && insight.kind === 'callout' ? insight.text : t.summary
+    const answer = [insightText, concept, workedLast ? `Worked example: ${workedLast.title}${workedLast.math ? ` — ${workedLast.math}` : ''}.` : '']
+      .filter(Boolean).join(' ')
+    return [t.id, {
+      prompt: misconception
+        ? `A student claims: "${misconception}" Is that correct? Explain the physics.`
+        : `Explain the central idea of ${t.title.toLowerCase()} and state one assumption behind it.`,
+      answer,
+    }]
+  }))
+
 export const DERIVATIONS: Derivation[] = [
   ...FOUNDATION_DERIVATIONS, ...FIELD_DERIVATIONS, ...QUANTUM_DERIVATIONS, ...UNIVERSE_DERIVATIONS,
+  ...EXTRA_DERIVATIONS_1, ...EXTRA_DERIVATIONS_2,
 ]
 export const PROBLEMS: Problem[] = [
   ...FOUNDATION_PROBLEMS, ...FIELD_PROBLEMS, ...QUANTUM_PROBLEMS, ...UNIVERSE_PROBLEMS,
+  ...EXTRA_PROBLEMS_1, ...EXTRA_PROBLEMS_2,
 ]
 export const EXPERIMENTS: Experiment[] = [
   ...FOUNDATION_EXPERIMENTS, ...FIELD_EXPERIMENTS, ...QUANTUM_EXPERIMENTS, ...UNIVERSE_EXPERIMENTS,
+  ...EXTRA_EXPERIMENTS,
 ]
 
 const DEEP = new Set(TOPICS.map(t => t.id))

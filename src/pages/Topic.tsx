@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ChevronRight, Check, Bookmark, Play, Sigma, Beaker, Target, ArrowRight, Network } from 'lucide-react'
-import { TOPIC_BY_ID, BRANCH_BY_ID, topicDerivations, topicProblems, topicExperiments, TOPIC_KEY_EQUATIONS } from '../data'
+import { TOPIC_BY_ID, BRANCH_BY_ID, topicDerivations, topicProblems, topicExperiments, TOPIC_KEY_EQUATIONS, QUICK_CHECKS } from '../data'
 import { SIMULATIONS } from '../data/simulations'
 import { go } from '../lib/router'
 import { progress, useProgress } from '../lib/store'
@@ -12,7 +12,7 @@ export function TopicPage({ id }: { id: string }) {
   const topic = TOPIC_BY_ID[id]
   const p = useProgress()
   const [quizOpen, setQuizOpen] = useState(false)
-  const [answer, setAnswer] = useState('')
+  const [showAnswer, setShowAnswer] = useState(false)
 
   useEffect(() => { if (topic) progress.markStudying(topic.id) }, [id]) // eslint-disable-line
 
@@ -51,15 +51,17 @@ export function TopicPage({ id }: { id: string }) {
               <button className="btn btn-sm" onClick={() => progress.toggle('bookmarks', id)}><Bookmark size={13} /> {p.bookmarks.includes(id) ? 'Saved' : 'Save'}</button>
               <button className="btn btn-sm" onClick={() => setQuizOpen(q => !q)}>Quick check</button>
             </div>
-            {quizOpen && (
+            {quizOpen && QUICK_CHECKS[id] && (
               <div className="card" style={{ padding: 14, marginTop: 14 }}>
-                <div style={{ fontSize: 12.5, fontWeight: 600 }}>Self-assessment</div>
-                <p className="subtle" style={{ margin: '6px 0 10px' }}>State the single most important idea in this topic in one or two sentences. Then reveal the model answer and grade yourself honestly — mastery requires explaining it without notes.</p>
-                <textarea value={answer} onChange={e => setAnswer(e.target.value)} placeholder="Write your explanation…" style={{ width: '100%', minHeight: 70, background: '#0b1019', border: '1px solid var(--border)', borderRadius: 8, color: '#fff', padding: 10, outline: 0 }} />
-                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                  <button className="btn btn-sm" onClick={() => { progress.recordQuiz(id, answer.trim().length > 40); setAnswer(''); }}>Grade my attempt</button>
-                  <span className="subtle">Recorded to your mastery profile.</span>
+                <div style={{ fontSize: 12.5, fontWeight: 600 }}>Topic-specific quick check</div>
+                <p style={{ color: '#c8d2e2', margin: '6px 0 10px', lineHeight: 1.7 }}>{QUICK_CHECKS[id].prompt}</p>
+                <p className="subtle" style={{ fontSize: 11 }}>Write your explanation before revealing the model answer. Mastery means getting the reasoning right, not matching wording.</p>
+                <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                  <button className="btn btn-sm" onClick={() => setShowAnswer(s => !s)}>{showAnswer ? 'Hide model answer' : 'Reveal model answer'}</button>
+                  <button className="btn btn-sm" onClick={() => { progress.recordQuiz(id, true); setQuizOpen(false); setShowAnswer(false) }}>I explained it correctly</button>
+                  <button className="btn btn-sm" onClick={() => { progress.recordQuiz(id, false); go('/paths') }}>I need revision</button>
                 </div>
+                {showAnswer && <div className="callout insight" style={{ marginTop: 10 }}><div className="co-title">Model answer</div><p>{QUICK_CHECKS[id].answer}</p></div>}
               </div>
             )}
           </div>

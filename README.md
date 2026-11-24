@@ -7,9 +7,10 @@ An original, interactive, from-first-principles physics learning and research pl
 > 370 canonical topic slugs), a long-form subject-specific article for **every one of those 370
 > topics** — each with physical intuition, defined mathematical structure, a numerically worked
 > example, assumptions and failure modes, experimental evidence, common misconceptions and
-> cross-branch connections — plus 29 step-by-step derivations, 46 problems with full solutions,
-> 11 virtual experiments, 18 live simulations, a knowledge graph, learning paths, local mastery
-> tracking, an open-access reference library, and research/history explorers.
+> cross-branch connections — plus **101 step-by-step derivations**, **166 problems** with full
+> solutions, **29 virtual experiments**, **370 topic-specific self-assessment prompts**, 18 live
+> simulations, a knowledge graph, learning paths, local mastery tracking, an open-access
+> reference library, and research/history explorers.
 > Run `npm run check:content` to verify that no topic is left as a thin outline.
 
 ## Run locally
@@ -82,7 +83,7 @@ computed in the browser in real time.
 | 5 — relativity & quantum | ✅ substantial |
 | 6 — condensed matter, nuclear, particle, QFT | ✅ substantial |
 | 7 — astrophysics, cosmology, interdisciplinary | ✅ substantial |
-| 8 — virtual lab & problem arena | ✅ working, expandable |
+| 8 — virtual lab & problem arena | ✅ 29 experiments, 166 solved problems |
 | 9 — research explorer, library, knowledge graph | ✅ working |
 | 10 — tutoring, personalisation, progress | ✅ progress/mastery/spaced repetition; AI tutor is a design stub, not wired to a model |
 | 11 — verification | typecheck + build + `npm run check:content` (370/370 deep articles) |
