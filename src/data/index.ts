@@ -4,14 +4,32 @@ import { FOUNDATION_TOPICS, FOUNDATION_DERIVATIONS, FOUNDATION_PROBLEMS, FOUNDAT
 import { FIELD_TOPICS, FIELD_DERIVATIONS, FIELD_PROBLEMS, FIELD_EXPERIMENTS } from './content.fields'
 import { QUANTUM_TOPICS, QUANTUM_DERIVATIONS, QUANTUM_PROBLEMS, QUANTUM_EXPERIMENTS } from './content.quantum'
 import { UNIVERSE_TOPICS, UNIVERSE_DERIVATIONS, UNIVERSE_PROBLEMS, UNIVERSE_EXPERIMENTS } from './content.universe'
+import { EXPANDED_TOPICS_1 } from './content.expanded.1'
+import { EXPANDED_TOPICS_2 } from './content.expanded.2'
+import { EXPANDED_TOPICS_3 } from './content.expanded.3'
+import { EXPANDED_TOPICS_4 } from './content.expanded.4'
+import { EXPANDED_TOPICS_5 } from './content.expanded.5'
+import { EXPANDED_TOPICS_6 } from './content.expanded.6'
+import { EXPANDED_TOPICS_7 } from './content.expanded.7'
+import { EXPANDED_TOPICS_8 } from './content.expanded.8'
+import { EXPANDED_TOPICS_9 } from './content.expanded.9'
+import { EXPANDED_SHORT_TOPICS } from './content.expanded.short'
 import { REFERENCES, LEARNING_PATHS, TIMELINE, FRONTIERS, SCIENTISTS, TOPIC_SUMMARIES, TOPIC_KEY_EQUATIONS } from './content.library'
 
 export { BRANCHES, BRANCH_BY_ID, ALL_TOPIC_IDS }
 export { REFERENCES, LEARNING_PATHS, TIMELINE, FRONTIERS, SCIENTISTS, TOPIC_SUMMARIES, TOPIC_KEY_EQUATIONS }
 
-export const TOPICS: Topic[] = [
+const ALL_AUTHORED: Topic[] = [
   ...FOUNDATION_TOPICS, ...FIELD_TOPICS, ...QUANTUM_TOPICS, ...UNIVERSE_TOPICS,
+  ...EXPANDED_TOPICS_1, ...EXPANDED_TOPICS_2, ...EXPANDED_TOPICS_3,
+  ...EXPANDED_TOPICS_4, ...EXPANDED_TOPICS_5, ...EXPANDED_TOPICS_6,
+  ...EXPANDED_TOPICS_7, ...EXPANDED_TOPICS_8, ...EXPANDED_TOPICS_9,
+  // Full replacements for the last thin articles come last and win deduplication.
+  ...EXPANDED_SHORT_TOPICS,
 ]
+// A Map keyed by id keeps the final (deepest) version of any topic that was
+// authored more than once.
+export const TOPICS: Topic[] = [...new Map(ALL_AUTHORED.map(t => [t.id, t])).values()]
 export const DERIVATIONS: Derivation[] = [
   ...FOUNDATION_DERIVATIONS, ...FIELD_DERIVATIONS, ...QUANTUM_DERIVATIONS, ...UNIVERSE_DERIVATIONS,
 ]

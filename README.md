@@ -4,11 +4,13 @@ An original, interactive, from-first-principles physics learning and research pl
 
 > **Scope note.** This repository is a working, integrated foundation, not a claim to contain
 > every fact ever written about physics. It ships a complete knowledge architecture (31 branches,
-> 370 canonical topic slugs), long-form articles and derivations for a curated set of core
-> topics, verified curriculum outlines for the remainder, 18 live simulations, virtual
-> experiments, a problem arena, a knowledge graph, learning paths, local mastery tracking,
-> an open-access reference library, and research/history explorers. Content is designed to
-> grow branch-by-branch without restructuring the application.
+> 370 canonical topic slugs), a long-form subject-specific article for **every one of those 370
+> topics** — each with physical intuition, defined mathematical structure, a numerically worked
+> example, assumptions and failure modes, experimental evidence, common misconceptions and
+> cross-branch connections — plus 29 step-by-step derivations, 46 problems with full solutions,
+> 11 virtual experiments, 18 live simulations, a knowledge graph, learning paths, local mastery
+> tracking, an open-access reference library, and research/history explorers.
+> Run `npm run check:content` to verify that no topic is left as a thin outline.
 
 ## Run locally
 
@@ -48,10 +50,11 @@ Every article is a `Topic` containing typed `Block`s (paragraph, heading, math, 
 callout, steps, table, simulation, quote). This keeps prose, mathematics and interactivity
 in one structured source and lets any branch be added by appending a data module.
 
-Topics without a hand-authored long-form article are generated as **curriculum outlines**:
-they carry a curated one-sentence description, canonical equations, a study sequence and an
-explicit notice that the long-form article is in preparation. They are never presented as
-complete treatments — this is deliberate intellectual honesty.
+Every canonical topic resolves to a hand-authored long-form article. The curriculum-outline
+generator remains in the composition layer only as a safety net: if a future branch is added
+before its articles are written, that topic renders as an explicitly labelled outline rather
+than an empty or deceptively shallow page. `npm run check:content` fails if any outline or
+shallow article is present in the published set.
 
 ### Simulation engine
 
@@ -82,7 +85,7 @@ computed in the browser in real time.
 | 8 — virtual lab & problem arena | ✅ working, expandable |
 | 9 — research explorer, library, knowledge graph | ✅ working |
 | 10 — tutoring, personalisation, progress | ✅ progress/mastery/spaced repetition; AI tutor is a design stub, not wired to a model |
-| 11 — verification | typecheck + build; content validation script |
+| 11 — verification | typecheck + build + `npm run check:content` (370/370 deep articles) |
 
 Remaining work is primarily **depth of content**, not new architecture: converting the
 curriculum outlines into long-form articles branch by branch, adding more problems and
