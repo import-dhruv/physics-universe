@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { ChevronRight, Check, Bookmark, Play, Sigma, Beaker, Target, ArrowRight, Network } from 'lucide-react'
-import { TOPIC_BY_ID, BRANCH_BY_ID, topicDerivations, topicProblems, topicExperiments, TOPIC_KEY_EQUATIONS, QUICK_CHECKS } from '../data'
+import { ChevronRight, Check, Bookmark, Play, Sigma, Beaker, Target, ArrowRight, Network, BookOpen } from 'lucide-react'
+import { TOPIC_BY_ID, BRANCH_BY_ID, topicDerivations, topicProblems, topicExperiments, TOPIC_KEY_EQUATIONS, QUICK_CHECKS, PAPERS_BY_TOPIC } from '../data'
 import { SIMULATIONS } from '../data/simulations'
 import { go } from '../lib/router'
 import { progress, useProgress } from '../lib/store'
@@ -110,6 +110,12 @@ export function TopicPage({ id }: { id: string }) {
           {problems.length > 0 && <div className="card toc-box" style={{ marginBottom: 14 }}>
             <h4><Target size={12} style={{ verticalAlign: -2 }} /> Practice</h4>
             {problems.slice(0, 5).map(pr => <button className="toc-link" key={pr.id} style={{ display: 'block', width: '100%', textAlign: 'left', border: 0, background: 'none', cursor: 'pointer' }} onClick={() => go(`/problem/${pr.id}`)}>{pr.title}</button>)}
+          </div>}
+
+          {(PAPERS_BY_TOPIC.get(id)?.length ?? 0) > 0 && <div className="card toc-box" style={{ marginBottom: 14 }}>
+            <h4><BookOpen size={12} style={{ verticalAlign: -2 }} /> Research papers</h4>
+            {PAPERS_BY_TOPIC.get(id)!.slice(0, 4).map(p => <button className="toc-link" key={p.id} style={{ display: 'block', width: '100%', textAlign: 'left', border: 0, background: 'none', cursor: 'pointer', lineHeight: 1.35 }} onClick={() => go(`/paper/${p.id}`)}>{p.title.slice(0, 90)}{p.title.length > 90 ? '…' : ''}</button>)}
+            <button className="toc-link" style={{ display: 'block', width: '100%', textAlign: 'left', border: 0, background: 'none', cursor: 'pointer', color: '#6ea8ff' }} onClick={() => go('/papers')}>Browse all papers →</button>
           </div>}
 
           <div className="card toc-box">

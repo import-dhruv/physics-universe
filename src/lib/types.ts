@@ -175,6 +175,24 @@ export interface Frontier {
   topicIds: string[]
 }
 
+export interface Paper {
+  id: string
+  title: string
+  authors: string[]
+  published: string
+  year: string
+  category: string
+  domain: 'Mathematics' | 'Physics'
+  summary: string
+  url: string
+  pdf?: string
+  doi?: string
+  comment?: string
+  source: 'arXiv' | 'Curated'
+  topicIds: string[]
+  frontierIds: string[]
+}
+
 export interface Scientist {
   id: string
   name: string
