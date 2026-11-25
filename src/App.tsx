@@ -86,13 +86,16 @@ function RouteView({ route }: { route: string }) {
   const [area, id] = parts
   if (!area) return <HomePage />
   switch (area) {
-    case 'explore': return id ? <BranchPage id={id} /> : <ExplorePage />
+    case 'explore':
+    case 'branch': return id ? <BranchPage id={id} /> : <ExplorePage />
     case 'topic': return id ? <TopicPage id={id} /> : <ExplorePage />
     case 'mathematics': return <MathematicsPage />
     case 'lab': return <LabPage />
     case 'simulation': return id ? <SimulationPage id={id} /> : <LabPage />
-    case 'experiments': return id ? <ExperimentPage id={id} /> : <ExperimentsPage />
-    case 'problems': return id ? <ProblemPage id={id} /> : <ProblemArena />
+    case 'experiments':
+    case 'experiment': return id ? <ExperimentPage id={id} /> : <ExperimentsPage />
+    case 'problems':
+    case 'problem': return id ? <ProblemPage id={id} /> : <ProblemArena />
     case 'derivation': return id ? <DerivationPage id={id} /> : <ExplorePage />
     case 'research': return id ? (id === 'frontier' ? <ResearchPage focus={id} /> : <FrontierPage id={id} />) : <ResearchPage />
     case 'history': return id ? <HistoryPage focus={id} /> : <HistoryPage />
