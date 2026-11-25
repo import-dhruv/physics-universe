@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import {
   Home, Compass, Sigma, Atom, FlaskConical, Target, Telescope, Network,
   Route as RouteIcon, ChartNoAxesCombined, Library as LibraryIcon, Search,
-  Menu, X, ChevronRight, Sparkles,
+  Menu, X, ChevronRight, Sparkles, BookOpen,
 } from 'lucide-react'
 import { GlobalSearch } from './components/Search'
 import { useRoute, go } from './lib/router'
@@ -23,6 +23,7 @@ import { PathsPage } from './pages/Paths'
 import { ProgressPage } from './pages/Progress'
 import { LibraryPage } from './pages/Library'
 import { TutorPage } from './pages/Tutor'
+import { PapersPage, PaperPage } from './pages/Papers'
 
 const NAV = [
   { path: '/', label: 'Home', icon: Home },
@@ -37,6 +38,7 @@ const NAV = [
   { path: '/progress', label: 'My Progress', icon: ChartNoAxesCombined },
   { path: '/library', label: 'Reference Library', icon: LibraryIcon },
   { path: '/tutor', label: 'AI Physics Tutor', icon: Sparkles },
+  { path: '/papers', label: 'Research Papers', icon: BookOpen },
 ]
 
 function Sidebar({ route, onSearch, mobile, close }: { route: string; onSearch: () => void; mobile: boolean; close: () => void }) {
@@ -104,6 +106,8 @@ function RouteView({ route }: { route: string }) {
     case 'progress': return <ProgressPage />
     case 'library': return <LibraryPage />
     case 'tutor': return <TutorPage />
+    case 'papers': return <PapersPage />
+    case 'paper': return id ? <PaperPage id={id} /> : <PapersPage />
     default: return <HomePage />
   }
 }

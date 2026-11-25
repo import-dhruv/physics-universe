@@ -12,9 +12,13 @@ An original, interactive, from-first-principles physics learning and research pl
 > deterministic topic-aligned families, **29 virtual experiments**, **370 topic-specific
 > self-assessment prompts**, 18 live
 > simulations, a knowledge graph, learning paths, local mastery tracking, an open-access
-> reference library, and research/history explorers.
-> Run `npm run check:content` to verify that no topic is left as a thin outline, and
-> `npm run check:math` to verify that every published equation renders in KaTeX.
+> reference library, a searchable corpus of real arXiv research papers, and research/history
+> explorers.
+> Run `npm run check:content` to verify that no topic is left as a thin outline,
+> `npm run check:math` for equations, `npm run check:generated` for the 20,000 generated
+> problems and `npm run check:papers` for corpus integrity. The paper corpus is an arXiv
+> snapshot across 50 mathematics/physics categories — real metadata only, explicitly not a
+> claim of exhaustively indexing every paper ever published.
 
 ## Run locally
 
@@ -39,6 +43,7 @@ src/
     content.*.ts            authored content, split by domain (modular growth)
     content.library.ts      references, paths, timeline, frontiers, topic summaries
     generated/             100 deterministic problem families → 20,000 generated problems
+    papers.arxiv.json      verified arXiv metadata snapshot (real papers only)
     index.ts                composition layer + curriculum-outline generator
   components/
     Blocks.tsx              generic renderer for content blocks
@@ -88,7 +93,7 @@ computed in the browser in real time.
 | 6 — condensed matter, nuclear, particle, QFT | ✅ substantial |
 | 7 — astrophysics, cosmology, interdisciplinary | ✅ substantial |
 | 8 — virtual lab & problem arena | ✅ 29 experiments, 20,166 problems (paginated, searchable) |
-| 9 — research explorer, library, knowledge graph | ✅ working |
+| 9 — research explorer, library, knowledge graph | ✅ working, with searchable arXiv paper corpus |
 | 10 — tutoring, personalisation, progress | ✅ progress/mastery/spaced repetition; AI tutor is a design stub, not wired to a model |
 | 11 — verification | typecheck + build + `npm run check:content` (370/370 articles) + `npm run check:math` (10,034 equations) + `npm run check:generated` (20,000 problems) |
 

@@ -26,6 +26,11 @@ export {
   generatedForTopic, generatedIdsForFamily, parseGeneratedId,
 } from './generated'
 import { generatedForTopic } from './generated'
+export {
+  PAPERS, PAPER_BY_ID, PAPER_CATEGORIES, PAPER_STATS,
+  PAPERS_BY_TOPIC, PAPERS_BY_FRONTIER,
+} from './papers'
+export { PAPERS_BY_TOPIC as TOPIC_PAPERS, PAPERS_BY_FRONTIER as FRONTIER_PAPERS } from './papers'
 import { REFERENCES, LEARNING_PATHS, TIMELINE, FRONTIERS, SCIENTISTS, TOPIC_SUMMARIES, TOPIC_KEY_EQUATIONS } from './content.library'
 
 export { BRANCHES, BRANCH_BY_ID, ALL_TOPIC_IDS }

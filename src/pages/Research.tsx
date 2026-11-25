@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ChevronRight, Telescope, BookOpen, ArrowRight, ExternalLink } from 'lucide-react'
-import { FRONTIERS, TIMELINE, SCIENTISTS, REFERENCES, BRANCH_BY_ID } from '../data'
+import { FRONTIERS, TIMELINE, SCIENTISTS, REFERENCES, BRANCH_BY_ID, PAPER_STATS, PAPERS_BY_FRONTIER } from '../data'
 import { go } from '../lib/router'
 import { InlineText } from '../components/Blocks'
 
@@ -14,6 +14,14 @@ export function ResearchPage({ focus }: { focus?: string }) {
       <div className="eyebrow">Research & frontier explorer</div>
       <h1 style={{ margin: '12px 0 10px' }}>The Edge of What We Know</h1>
       <p className="lead">Established theory, active hypotheses, open problems and speculation are labelled separately. The goal is not to admire mystery but to understand exactly where the evidence stops and how one might extend it.</p>
+
+      <button className="card card-hover" onClick={() => go('/papers')} style={{ padding: 20, textAlign: 'left', marginTop: 22, width: '100%', background: 'linear-gradient(120deg,rgba(110,168,255,.09),rgba(139,124,255,.05))' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+          <div><div className="eyebrow">Open-access literature</div><h2 style={{ fontSize: '1.4rem', margin: '8px 0 6px' }}>Research Papers · {PAPER_STATS.total.toLocaleString()} real preprints</h2>
+            <p className="subtle" style={{ margin: 0, maxWidth: '70ch' }}>Verified arXiv metadata across {PAPER_STATS.categories} mathematics and physics categories. Search by title, author, abstract or topic and follow the original source link.</p></div>
+          <ArrowRight size={22} color="#6ea8ff" />
+        </div>
+      </button>
 
       <div className="grid g4" style={{ marginTop: 22 }}>
         {[
@@ -78,6 +86,10 @@ export function FrontierPage({ id }: { id: string }) {
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
         {f.topicIds.map(tid => <button className="chip" key={tid} style={{ cursor: 'pointer' }} onClick={() => go(`/topic/${tid}`)}>{tid.replace(/-/g, ' ')} <ArrowRight size={10} /></button>)}
       </div>
+      {(() => { const fps = PAPERS_BY_FRONTIER.get(f.id) ?? []; return fps.length > 0 ? <>
+        <div className="section-head"><div><div className="eyebrow">Live literature</div><h2 style={{ fontSize: '1.3rem' }}>Recent open-access papers</h2></div><button className="btn btn-sm" onClick={() => go('/papers')}>Browse all <ArrowRight size={12} /></button></div>
+        <div className="grid g2">{fps.slice(0, 6).map(p => <button className="card" key={p.id} onClick={() => go(`/paper/${p.id}`)} style={{ padding: 14, textAlign: 'left' }}><h3 style={{ fontSize: 12.5, lineHeight: 1.45 }}>{p.title}</h3><div className="subtle" style={{ fontSize: 10.5, marginTop: 6 }}>{p.authors.slice(0, 3).join(', ')} · {p.published}</div></button>)}</div>
+      </> : null })()}
       {f.references.length > 0 && <><div className="section-head"><div><div className="eyebrow">Literature</div><h2 style={{ fontSize: '1.3rem' }}>Open-access pointers</h2></div></div>
         <div className="card panel">{f.references.map((r, i) => <div className="mini-item" key={i}><ExternalLink size={13} color="#6ea8ff" /><div className="mi-title" style={{ fontWeight: 500 }}>{r.startsWith('http') ? <a href={r} target="_blank" rel="noreferrer">{r}</a> : r}</div></div>)}</div>
       </>}
