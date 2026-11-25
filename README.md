@@ -8,7 +8,9 @@ An original, interactive, from-first-principles physics learning and research pl
 > topics** — each with physical intuition, defined mathematical structure, a numerically worked
 > example, assumptions and failure modes, experimental evidence, common misconceptions and
 > cross-branch connections — plus **101 step-by-step derivations**, **166 problems** with full
-> solutions, **29 virtual experiments**, **370 topic-specific self-assessment prompts**, 18 live
+> solutions, **20,000 generated problems** (10,000 mathematics + 10,000 physics) from 100
+> deterministic topic-aligned families, **29 virtual experiments**, **370 topic-specific
+> self-assessment prompts**, 18 live
 > simulations, a knowledge graph, learning paths, local mastery tracking, an open-access
 > reference library, and research/history explorers.
 > Run `npm run check:content` to verify that no topic is left as a thin outline, and
@@ -36,6 +38,7 @@ src/
     simulations.ts          metadata for the 18 interactive simulations
     content.*.ts            authored content, split by domain (modular growth)
     content.library.ts      references, paths, timeline, frontiers, topic summaries
+    generated/             100 deterministic problem families → 20,000 generated problems
     index.ts                composition layer + curriculum-outline generator
   components/
     Blocks.tsx              generic renderer for content blocks
@@ -84,10 +87,10 @@ computed in the browser in real time.
 | 5 — relativity & quantum | ✅ substantial |
 | 6 — condensed matter, nuclear, particle, QFT | ✅ substantial |
 | 7 — astrophysics, cosmology, interdisciplinary | ✅ substantial |
-| 8 — virtual lab & problem arena | ✅ 29 experiments, 166 solved problems |
+| 8 — virtual lab & problem arena | ✅ 29 experiments, 20,166 problems (paginated, searchable) |
 | 9 — research explorer, library, knowledge graph | ✅ working |
 | 10 — tutoring, personalisation, progress | ✅ progress/mastery/spaced repetition; AI tutor is a design stub, not wired to a model |
-| 11 — verification | typecheck + build + `npm run check:content` (370/370 deep articles) + `npm run check:math` (10,034 equations) |
+| 11 — verification | typecheck + build + `npm run check:content` (370/370 articles) + `npm run check:math` (10,034 equations) + `npm run check:generated` (20,000 problems) |
 
 Remaining work is primarily **depth of content**, not new architecture: converting the
 curriculum outlines into long-form articles branch by branch, adding more problems and

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Search as SearchIcon, X, CornerDownLeft } from 'lucide-react'
 import { ALL_TOPICS, DERIVATIONS, EXPERIMENTS, PROBLEMS, BRANCHES, SCIENTISTS, FRONTIERS } from '../data'
 import { SIMULATIONS } from '../data/simulations'
+import { GENERATED_FAMILIES } from '../data/generated'
 import { go } from '../lib/router'
 import { BRANCH_BY_ID } from '../data/architecture'
 
@@ -27,6 +28,11 @@ function buildIndex(): SearchHit[] {
   SIMULATIONS.forEach(s => hits.push({ id: s.id, title: s.title, sub: 'Interactive simulation', group: 'Simulations', path: `/simulation/${s.id}`, color: '#7ec8ff' }))
   SCIENTISTS.forEach(s => hits.push({ id: s.id, title: s.name, sub: `${s.years} · ${s.field}`, group: 'Scientists', path: `/history/${s.id}`, color: '#ff9eb5' }))
   FRONTIERS.forEach(f => hits.push({ id: f.id, title: f.title, sub: `${f.field} · ${f.status}`, group: 'Research frontiers', path: `/research/${f.id}`, color: '#c79cff' }))
+  GENERATED_FAMILIES.forEach(f => hits.push({
+    id: f.id, title: `${f.title} — generated problem set`,
+    sub: `${f.domain === 'math' ? 'Mathematics' : 'Physics'} · 10,000 variants available`,
+    group: 'Generated problem sets', path: `/problem/gen-${f.domain}-${f.id}-0`, color: '#ffb454',
+  }))
   return hits
 }
 
