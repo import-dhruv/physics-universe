@@ -2411,7 +2411,7 @@ export const FIELD_PROBLEMS: Problem[] = [
       'Evaluate the powers separately: π^(8/3) ≈ 21.2 and 100^(11/3) ≈ 2.15 × 10⁷.',
     ],
     solution: [
-      { title: 'Chirp mass', text: 'For m₁ = m₂ = m the expression reduces to a single power of two.', math: String.raw`\mathcal{M}_c=\frac{m^2^{3/5}}{(2m)^{1/5}}=\frac{m}{2^{1/5}}\approx\frac{10}{1.149}\approx8.7\,M_\odot` },
+      { title: 'Chirp mass', text: 'For m₁ = m₂ = m the expression reduces to a single power of two.', math: String.raw`\mathcal{M}_c=\frac{(m^{2})^{3/5}}{(2m)^{1/5}}=\frac{m}{2^{1/5}}\approx\frac{10}{1.149}\approx8.7\,M_\odot` },
       { title: 'Chirp time scale', text: 'Convert the mass to a time.', math: String.raw`\frac{G\mathcal{M}_c}{c^3}\approx(8.7)(4.93\times10^{-6})\approx4.3\times10^{-5}\ \mathrm{s}` },
       { title: 'Evaluate powers', text: 'Compute the mass and frequency factors separately.', math: String.raw`(4.3\times10^{-5})^{5/3}\approx5.3\times10^{-8},\quad 100^{11/3}\approx2.15\times10^7,\quad \pi^{8/3}\approx21.2` },
       { title: 'Combine', text: 'Multiply the constants and factors.', math: String.raw`\dot f\approx(19.2)(21.2)(5.3\times10^{-8})(2.15\times10^7)\approx4.6\times10^2\ \mathrm{Hz\,s^{-1}}` },

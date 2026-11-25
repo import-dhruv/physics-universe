@@ -11,7 +11,8 @@ An original, interactive, from-first-principles physics learning and research pl
 > solutions, **29 virtual experiments**, **370 topic-specific self-assessment prompts**, 18 live
 > simulations, a knowledge graph, learning paths, local mastery tracking, an open-access
 > reference library, and research/history explorers.
-> Run `npm run check:content` to verify that no topic is left as a thin outline.
+> Run `npm run check:content` to verify that no topic is left as a thin outline, and
+> `npm run check:math` to verify that every published equation renders in KaTeX.
 
 ## Run locally
 
@@ -86,7 +87,7 @@ computed in the browser in real time.
 | 8 — virtual lab & problem arena | ✅ 29 experiments, 166 solved problems |
 | 9 — research explorer, library, knowledge graph | ✅ working |
 | 10 — tutoring, personalisation, progress | ✅ progress/mastery/spaced repetition; AI tutor is a design stub, not wired to a model |
-| 11 — verification | typecheck + build + `npm run check:content` (370/370 deep articles) |
+| 11 — verification | typecheck + build + `npm run check:content` (370/370 deep articles) + `npm run check:math` (10,034 equations) |
 
 Remaining work is primarily **depth of content**, not new architecture: converting the
 curriculum outlines into long-form articles branch by branch, adding more problems and

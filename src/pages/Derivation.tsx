@@ -69,7 +69,7 @@ export function DerivationPage({ id }: { id: string }) {
 
       <div className="card" style={{ padding: 20, marginTop: 24, background: 'linear-gradient(135deg,rgba(110,168,255,.07),transparent)' }}>
         <div className="eyebrow">Physical meaning of the result</div>
-        <h2 style={{ fontSize: 13, marginTop: 10 }}>{d.result}</h2>
+        <h2 style={{ fontSize: 13, marginTop: 10 }}><InlineText text={d.result} /></h2>
         <p style={{ color: '#c8d2e2', lineHeight: 1.8, margin: 0 }}><InlineText text={d.interpretation} /></p>
         <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
           {topic && <button className="btn btn-sm" onClick={() => go(`/topic/${topic.id}`)}><Compass size={13} /> Back to {topic.title}</button>}

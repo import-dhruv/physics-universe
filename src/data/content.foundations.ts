@@ -1040,7 +1040,7 @@ export const FOUNDATION_DERIVATIONS: Derivation[] = [
     ],
     variables: [
       { symbol: 'ρ, v⃗', meaning: 'density and velocity field' },
-      { symbol: 'σ̲̲', meaning: 'Cauchy stress tensor' },
+      { symbol: '\sigma', meaning: 'Cauchy stress tensor' },
       { symbol: 'p, μ', meaning: 'pressure and dynamic viscosity' },
       { symbol: 'D/Dt', meaning: 'material derivative ∂/∂t + v⃗·∇' },
       { symbol: 'g⃗', meaning: 'gravitational acceleration' },
