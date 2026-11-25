@@ -9,7 +9,8 @@
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "check:content": "node scripts/check-coverage.mjs",
-    "check:math": "node scripts/validate-math.mjs"
+    "check:math": "node scripts/validate-math.mjs",
+    "check:generated": "node scripts/check-generated.mjs"
   },
   "dependencies": {
     "katex": "^0.16.22",

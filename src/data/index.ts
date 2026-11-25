@@ -20,6 +20,12 @@ import { EXTRA_DERIVATIONS_1 } from './content.extra.derivations1'
 import { EXTRA_DERIVATIONS_2 } from './content.extra.derivations2'
 import { EXTRA_PROBLEMS_1 } from './content.extra.problems1'
 import { EXTRA_PROBLEMS_2 } from './content.extra.problems2'
+export {
+  GENERATED_FAMILIES, MATH_FAMILIES, PHYSICS_FAMILIES, GENERATED_COUNT,
+  ALL_GENERATED_IDS, MATH_IDS, PHYSICS_IDS, getGeneratedProblem, getGeneratedMeta,
+  generatedForTopic, generatedIdsForFamily, parseGeneratedId,
+} from './generated'
+import { generatedForTopic } from './generated'
 import { REFERENCES, LEARNING_PATHS, TIMELINE, FRONTIERS, SCIENTISTS, TOPIC_SUMMARIES, TOPIC_KEY_EQUATIONS } from './content.library'
 
 export { BRANCHES, BRANCH_BY_ID, ALL_TOPIC_IDS }
@@ -149,7 +155,7 @@ export const DERIVATION_BY_ID = Object.fromEntries(DERIVATIONS.map(d => [d.id, d
 export const PROBLEM_BY_ID = Object.fromEntries(PROBLEMS.map(p => [p.id, p])) as Record<string, Problem>
 export const EXPERIMENT_BY_ID = Object.fromEntries(EXPERIMENTS.map(e => [e.id, e])) as Record<string, Experiment>
 
-export function topicProblems(id: string) { return PROBLEMS.filter(p => p.topicId === id) }
+export function topicProblems(id: string) { return [...PROBLEMS.filter(p => p.topicId === id), ...generatedForTopic(id)] }
 export function topicDerivations(id: string) { return DERIVATIONS.filter(d => d.topicId === id) }
 export function topicExperiments(id: string) { return EXPERIMENTS.filter(e => e.topicId === id) }
 export function topicsForBranch(branchId: string) { return ALL_TOPICS.filter(t => t.branchId === branchId) }
@@ -159,7 +165,9 @@ export const STATS = {
   topics: ALL_TOPICS.length,
   deepTopics: TOPICS.length,
   derivations: DERIVATIONS.length,
-  problems: PROBLEMS.length,
+  problems: PROBLEMS.length + 20000,
+  authoredProblems: PROBLEMS.length,
+  generatedProblems: 20000,
   experiments: EXPERIMENTS.length,
   simulations: 18,
   references: REFERENCES.length,
