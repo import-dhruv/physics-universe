@@ -1127,7 +1127,7 @@ export const EXTRA_DERIVATIONS_2: Derivation[] = [
     tools: ['Variational principle', 'Secular determinant', 'Normalisation', 'Two-by-two eigenvalue problem', 'Symmetry (gerade and ungerade)'],
     steps: [
       { title: 'Write the trial orbital', text: 'Take a linear combination and form the expectation value of the Hamiltonian.', math: String.raw`$\psi=c_A\phi_A+c_B\phi_B,\qquad E=\frac{c_A^2H_{AA}+2c_Ac_BH_{AB}}{c_A^2+2c_Ac_BS+c_B^2}$` },
-      { title: 'Impose stationarity', text: 'Minimising with respect to the coefficients gives a pair of secular equations.', math: String.raw`$(H_{AA}-E)c_A+(H_{AB}-ES)c_B=0$ and its exchange partner` },
+      { title: 'Impose stationarity', text: 'Minimising with respect to the coefficients gives a pair of secular equations and its exchange partner.', math: String.raw`(H_{AA}-E)c_A+(H_{AB}-ES)c_B=0` },
       { title: 'Solve the secular determinant', text: 'Nonzero coefficients require the determinant to vanish.', math: String.raw`$(H_{AA}-E)^2-(H_{AB}-ES)^2=0\;\Longrightarrow\;H_{AA}-E=\pm(H_{AB}-ES)$` },
       { title: 'Identify bonding and antibonding', text: 'Solving for E gives two levels split by the resonance integral and overlap.', math: String.raw`$E_\pm=\frac{H_{AA}\pm H_{AB}}{1\pm S}$` },
     ],
@@ -1172,7 +1172,7 @@ export const EXTRA_DERIVATIONS_2: Derivation[] = [
       { title: 'Normalise the combinations', text: 'Symmetric and antisymmetric combinations of two atomic orbitals carry different normalisation factors.', math: String.raw`$\psi_g=\frac{\phi_A+\phi_B}{\sqrt{2(1+S)}},\qquad \psi_u=\frac{\phi_A-\phi_B}{\sqrt{2(1-S)}}$` },
       { title: 'Count electrons', text: 'Fill the molecular orbital energy diagram with the available valence electrons.', math: String.raw`$N_b+N_a=N_{\rm valence}$` },
       { title: 'Form the bond order', text: 'Each bonding electron strengthens and each antibonding electron weakens the bond; a chemical bond contains two electrons.', math: String.raw`$\mathrm{B.O.}=\frac{N_b-N_a}{2}$` },
-      { title: 'Apply to oxygen', text: 'The configuration of O2 leaves two electrons unpaired in antibonding pi orbitals.', math: String.raw`$N_b=8,\ N_a=4\ \Rightarrow\ \mathrm{B.O.}=2$, with two unpaired electrons giving paramagnetism` },
+      { title: 'Apply to oxygen', text: 'The configuration of O2 leaves two electrons unpaired in antibonding pi orbitals, giving paramagnetism.', math: String.raw`N_b=8,\quad N_a=4\quad\Rightarrow\quad \mathrm{B.O.}=2` },
     ],
     result: String.raw`$\mathrm{B.O.}=(N_b-N_a)/2$; bond order 0 means no stable bond, 1, 2 and 3 correspond to single, double and triple bonds.`,
     interpretation: 'Bond order converts an abstract orbital filling diagram into chemically meaningful predictions about bond multiplicity, length and magnetism. It correctly predicts that oxygen is paramagnetic, a failure of simple valence bond pictures.',
@@ -1388,7 +1388,7 @@ export const EXTRA_DERIVATIONS_2: Derivation[] = [
     steps: [
       { title: 'Find the vacuum field', text: 'A single mode of frequency omega in volume V has a nonzero field amplitude even with zero photons.', math: String.raw`$E_{\rm vac}=\sqrt{\frac{\hbar\omega}{2\varepsilon_0 V}}$` },
       { title: 'Compute the coupling', text: 'The dipole interaction matrix element defines the vacuum Rabi frequency.', math: String.raw`$\hbar g=d E_{\rm vac}\;\Longrightarrow\;g=d\sqrt{\frac{\omega}{2\hbar\varepsilon_0 V}}$` },
-      { title: 'Write the coupled dynamics', text: 'The Jaynes-Cummings Hamiltonian gives a Rabi frequency that grows with photon number.', math: String.raw`$\Omega_n=2g\sqrt{n+1}$, giving vacuum splitting $2g$ at $n=0$` },
+      { title: 'Write the coupled dynamics', text: 'The Jaynes-Cummings Hamiltonian gives a Rabi frequency that grows with photon number, giving vacuum splitting 2g at n=0.', math: String.raw`\Omega_n=2g\sqrt{n+1}` },
       { title: 'Eliminate the fast cavity', text: 'When the cavity decays much faster than the coupling, adiabatic elimination gives an irreversible enhanced rate.', math: String.raw`$\Gamma_{\rm cav}=\frac{4g^2}{\kappa},\qquad \frac{\Gamma_{\rm cav}}{\gamma}=4C,\quad C=\frac{g^2}{\kappa\gamma}$` },
     ],
     result: String.raw`$g=d\sqrt{\omega/(2\hbar\varepsilon_0 V)}$; strong coupling requires $g\gg\kappa,\gamma$ and gives normal-mode splitting $2g$, while the Purcell rate is $4g^2/\kappa$.`,
