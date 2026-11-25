@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { ArrowRight, Sparkles, Play, BookOpen, Beaker, Sigma, Compass } from 'lucide-react'
+import { BranchIcon } from '../components/BranchIcon'
 import { BRANCHES, STATS, TIMELINE, FRONTIERS, LEARNING_PATHS, ALL_TOPICS } from '../data'
 import { SIMULATIONS } from '../data/simulations'
 import { go } from '../lib/router'
@@ -97,9 +98,9 @@ export function HomePage() {
 
       <div className="section-head"><div><div className="eyebrow">The discipline</div><h2>Every branch of physics</h2></div><button className="btn btn-sm" onClick={() => go('/explore')}>View full map <ArrowRight size={13} /></button></div>
       <div className="grid g4">
-        {BRANCHES.slice(0, 12).map(b => (
+        {BRANCHES.map(b => (
           <button className="card card-hover branch-tile" key={b.id} onClick={() => go(`/branch/${b.id}`)} style={{ textAlign: 'left' }}>
-            <div className="bt-icon" style={{ background: `${b.color}18`, color: b.color }}><span style={{ fontSize: 16 }}>◈</span></div>
+            <div className="bt-icon" style={{ background: `${b.color}18`, color: b.color }}><BranchIcon name={b.icon} /></div>
             <div className="bt-count">{b.topicIds.length}</div>
             <h3>{b.short}</h3><p>{b.description}</p>
           </button>

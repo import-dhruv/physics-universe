@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ArrowRight, ChevronRight, Layers } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
+import { BranchIcon } from '../components/BranchIcon'
 import { BRANCHES, BRANCH_BY_ID, ALL_TOPICS, topicsForBranch, STATS } from '../data'
 import { go } from '../lib/router'
 import { useProgress } from '../lib/store'
@@ -58,7 +59,7 @@ export function ExplorePage() {
       <div className="grid g3">
         {BRANCHES.filter(b => part === 'All' || b.part === part).map(b => (
           <button className="card card-hover branch-tile" key={b.id} onClick={() => go(`/branch/${b.id}`)} style={{ textAlign: 'left', minHeight: 130 }}>
-            <div className="bt-icon" style={{ background: `${b.color}18`, color: b.color }}><Layers size={17} /></div>
+            <div className="bt-icon" style={{ background: `${b.color}18`, color: b.color }}><BranchIcon name={b.icon} /></div>
             <div className="bt-count">{b.topicIds.length}</div>
             <h3>{b.title}</h3><p>{b.description}</p>
           </button>
